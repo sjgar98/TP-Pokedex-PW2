@@ -27,7 +27,8 @@ FROM pokemon p
 LEFT JOIN pokemon_tipos pt ON p.id = pt.pokemon
 LEFT JOIN tipos t ON t.id = pt.tipo
 " . ($queryTerm ? "WHERE LOWER(p.nombre) LIKE ?" : "") . "
-GROUP BY p.id;
+GROUP BY p.id
+ORDER BY p.numero;
 ";
 $stmtBusqueda = $sql->prepare($stmtBusquedaQuery);
 if ($queryTerm) {
@@ -133,7 +134,7 @@ if (count($resultados) == 1) {
                         echo "
                         <div class=\"row\">
                             <div class=\"col\">
-                                <div class=\"card mb-3\" style=\"max-width: 540px;\">
+                                <div class=\"card mb-3\">
                                     <div class=\"row g-0\">
                                         <div class=\"col-4 align-content-center\">
                                             <img src=\"$pokemon->sprite\" class=\"img-fluid rounded-start\" alt=\"...\">
