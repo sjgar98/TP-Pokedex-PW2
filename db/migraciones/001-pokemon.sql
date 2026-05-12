@@ -243,6 +243,8 @@ INSERT INTO pokemon_tipos (pokemon, tipo) VALUES
     (33, 4),
     (34, 4),
     (34, 5),
+    (35, 1),
+    (36, 1),
     (37, 10),
     (38, 10),
     (39, 1),
