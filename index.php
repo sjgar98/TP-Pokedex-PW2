@@ -43,6 +43,13 @@ while ($resultado = $stmtBusquedaResult->fetch_object()) {
     array_push($resultados, $resultado);
 }
 $sql->close();
+
+if (count($resultados) == 1) {
+    if (strtolower($queryTerm) == strtolower($resultados[0]->nombre)) {
+        $pokemonId = $resultados[0]->id;
+        header("Location: ./detalle.php?id=$pokemonId");
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -96,7 +103,9 @@ $sql->close();
                             }
                             echo "  </td>
                             <td class=\"align-middle\">$pokemon->numero</td>
-                            <td class=\"align-middle\">$pokemon->nombre</td>" . (
+                            <td class=\"align-middle\">
+                                <a href=\"./detalle.php?id=$pokemon->id\">$pokemon->nombre</a>
+                            </td>" . (
                                 $_SESSION['is_admin'] ? '
                             <td class="align-middle">
                                 <div class="d-flex gap-2">
@@ -132,7 +141,7 @@ $sql->close();
                                         <div class=\"col-8\">
                                             <div class=\"card-body\">
                                                 <h5 class=\"card-title d-flex align-items-center gap-2\">
-                                                    <span>#$pokemon->numero $pokemon->nombre</span>
+                                                    <span>#$pokemon->numero <a href=\"./detalle.php?id=$pokemon->id\">$pokemon->nombre</a></span>
                                                 </h5>
                                                 <div class=\"d-flex gap-1 mb-2\">";
                         foreach ($pokemon->tipos as $pkmn_tipo) {
