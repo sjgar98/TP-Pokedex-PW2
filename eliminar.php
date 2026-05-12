@@ -31,7 +31,7 @@ try {
     $stmtDelete = $sql->prepare("DELETE FROM pokemon WHERE id = ?");
     $stmtDelete->bind_param("i", $pokemonId);
     $stmtDelete->execute();
-    // unlink($pokemon->sprite);
+    unlink($pokemon->sprite);
   }
   $sql->commit();
   header('Location: ./index.php');
